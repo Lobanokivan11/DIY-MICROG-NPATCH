@@ -16,8 +16,6 @@ TARGET_CLASS_SMALI="L${TARGET_CLASS_PATH};"
 # Clear previous temporary directories and recreate the dex folder
 rm -rf tmp_dex tmp_smali
 mkdir -p tmp_dex
-rm smali.jar
-rm baksmali.jar
 wget -O baksmali.jar https://dl.google.com/android/maven2/com/android/tools/smali/smali-baksmali/3.0.8/smali-baksmali-3.0.8.jar
 wget -O smali.jar https://dl.google.com/android/maven2/com/android/tools/smali/smali/3.0.8/smali-3.0.8.jar
 # Extract all .dex files including those in subdirectories (e.g., assets/)
@@ -72,7 +70,8 @@ rm -rf tmp_dex tmp_smali
 zipalign -f -v 4 "$APK_OUT" "aligned_patched.apk"
 apksigner sign --ks-key-alias lob --ks sign.keystore --ks-pass pass:369852 --key-pass pass:369852 --out "final_signed.apk" "aligned_patched.apk"
 rm "aligned_patched.apk"
-
+rm smali.jar
+rm baksmali.jar
 echo "============================================="
 echo "Success! Final file: final_signed.apk"
 echo "============================================="
