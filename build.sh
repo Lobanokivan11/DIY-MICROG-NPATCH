@@ -8,6 +8,7 @@ sed -i '/android.applicationVariants.all { variant ->/a \    variant.mergedFlavo
 find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/"package_id", "com\.google\.android\.gms"/"package_id", "top.nkbe.npatch.gms"/g' || true
 find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/"package_id", "org\.microg\.gms"/"package_id", "top.nkbe.npatch.gms"/g' || true
 find . -name "AndroidManifest.xml" | xargs sed -i 's/com\.google\.android\.gms/top.nkbe.npatch.gms/g' || true
+find . -name "AndroidManifest.xml" | xargs sed -i 's/com\.google\.android\.googleapps/top.nkbe.npatch.googleapps/g' || true
 cp -r ../profiles/*.xml play-services-core/src/main/res/xml
 export GRADLE_MICROG_VERSION_WITHOUT_GIT=0
 ./gradlew :play-services-core:assembleMapboxDefault
