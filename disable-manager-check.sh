@@ -1,10 +1,6 @@
 APK_IN="original.apk"
 APK_OUT="patched.apk"
 TARGET_CLASS="top/nkbe/npatch/LSPApplication"
-
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt install libsmali-java -y
 unzip -q "$APK_IN" "*.dex" -d tmp_dex
 
 FOUND_DEX=""
