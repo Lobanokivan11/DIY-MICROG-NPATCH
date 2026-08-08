@@ -1,0 +1,32 @@
+name: Submodule updates
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0/30 * * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Pull & update submodules recursively
+        run: |
+          git submodule update --init --recursive
+          git submodule update --recursive --remote
+      - name: Commit & push changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -am "Update submodules"
+          git push
+      - name: Actions Ntfy
+        run: |
+          curl \
+          -u ${{ secrets.NTFY_CRED }} \
+          -H "Title: NPatch GmsCore's Submodules Is Updated" \
+          -H "Content-Type: text/plain" \
+          -d $'Repo: ${{ github.repository }}\nCommit: ${{ github.sha }}\nRef: ${{ github.ref }}\nStatus: ${{ job.status}}' \
+          ${{ secrets.NTFY_URL }}
