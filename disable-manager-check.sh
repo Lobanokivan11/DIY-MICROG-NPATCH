@@ -24,9 +24,8 @@ cp "$APK_IN" "$APK_OUT"
 cd tmp_dex
 zip -q -u "../$APK_OUT" "$FOUND_DEX"
 cd ..
-zip -q -d "$APK_OUT" "META-INF/*"
 rm -rf tmp_dex tmp_smali
-apksigner sign --ks-key-alias lob --ks ../sign.keystore --ks-pass pass:369852 --key-pass pass:369852 --out "final_signed.apk" "$APK_OUT"
+apksigner sign --ks-key-alias lob --ks sign.keystore --ks-pass pass:369852 --key-pass pass:369852 --out "final_signed.apk" "$APK_OUT"
 echo "============================================="
 echo "Success! Ready file: final_signed.apk"
 echo "============================================="
