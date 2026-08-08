@@ -4,7 +4,7 @@ git lfs install
 git submodule update --init --recursive
 git clone https://github.com/microg/GmsCore.git input
 cd input
-patch -t -s -p1 < ../gmscore.patch
+patch -t -s -p1 < ../npatch-gms.patch
 cp -r ../profiles/*.xml play-services-core/src/main/res/xml
 export GRADLE_MICROG_VERSION_WITHOUT_GIT=0
 ./gradlew :play-services-core:assembleMapboxUser
