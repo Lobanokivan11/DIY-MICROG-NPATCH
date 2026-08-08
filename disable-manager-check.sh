@@ -51,7 +51,7 @@ if [ ! -f "$SMALI_FILE" ]; then
 fi
 
 # Code modification: inject 'const/4 v5, 0x1' before the conditional jump
-sed -i '/[[:space:]]*if-nez v5, :cond_f/i \    const/4 v5, 0x1' "$SMALI_FILE"
+patch "$SMALI_FILE" < disable-check-manager.patch
 
 # Assemble the modified smali files back into the original dex file structure
 smali a tmp_smali -o "tmp_dex/$FOUND_DEX"
