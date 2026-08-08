@@ -22,10 +22,11 @@ sed -i '/if-nez v5, :cond_f/i \    const/4 v5, 0x1' "$SMALI_FILE"
 smali a tmp_smali -o "tmp_dex/$FOUND_DEX"
 cp "$APK_IN" "$APK_OUT"
 cd tmp_dex
-zip -q -u "../$APK_OUT" "$FOUND_DEX"
+zip -q -0 -u "../$APK_OUT" "$FOUND_DEX"
 cd ..
 rm -rf tmp_dex tmp_smali
-apksigner sign --ks-key-alias lob --ks sign.keystore --ks-pass pass:369852 --key-pass pass:369852 --out "final_signed.apk" "$APK_OUT"
+zipalign -f -v 4 "$APK_OUT" "aligned_patched.apk"
+apksigner sign --ks-key-alias lob --ks sign.keystore --ks-pass pass:369852 --key-pass pass:369852 --out "final_signed.apk" "aligned_patched.apk"
 echo "============================================="
 echo "Success! Ready file: final_signed.apk"
 echo "============================================="
