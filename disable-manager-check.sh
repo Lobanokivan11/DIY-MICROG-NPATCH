@@ -16,7 +16,10 @@ TARGET_CLASS_SMALI="L${TARGET_CLASS_PATH};"
 # Clear previous temporary directories and recreate the dex folder
 rm -rf tmp_dex tmp_smali
 mkdir -p tmp_dex
-
+rm smali.jar
+rm baksmali.jar
+wget -O baksmali.jar https://dl.google.com/android/maven2/com/android/tools/smali/smali-baksmali/3.0.8/smali-baksmali-3.0.8.jar
+wget -O smali.jar https://dl.google.com/android/maven2/com/android/tools/smali/smali/3.0.8/smali-3.0.8.jar
 # Extract all .dex files including those in subdirectories (e.g., assets/)
 unzip -q "$APK_IN" "*.dex" -d tmp_dex
 
@@ -24,7 +27,7 @@ FOUND_DEX=""
 # Recursively search through all extracted dex files
 while IFS= read -r -d '' dex; do
     # Check if the current dex file contains the target class
-    if baksmali list classes "$dex" | grep -q "^${TARGET_CLASS_SMALI}$"; then
+    if java -jar baksmali.jar list classes "$dex" | grep -q "^${TARGET_CLASS_SMALI}$"; then
         # Save the relative path inside tmp_dex
         FOUND_DEX="${dex#tmp_dex/}"
         echo "Class found in file: $FOUND_DEX"
@@ -40,7 +43,7 @@ if [ -z "$FOUND_DEX" ]; then
 fi
 
 # Decompile only the specific dex file containing the target class
-baksmali d "tmp_dex/$FOUND_DEX" -o tmp_smali
+java -jar baksmali.jar d "tmp_dex/$FOUND_DEX" -o tmp_smali
 
 # Verify that the expected .smali file exists after decompilation
 SMALI_FILE="tmp_smali/$TARGET_CLASS_PATH.smali"
@@ -54,7 +57,7 @@ fi
 patch "$SMALI_FILE" < disable-check-manager.patch
 
 # Assemble the modified smali files back into the original dex file structure
-smali a tmp_smali -o "tmp_dex/$FOUND_DEX"
+java -jar smali.jar a tmp_smali -o "tmp_dex/$FOUND_DEX"
 
 # Copy the original APK and update it with the modified dex file
 cp "$APK_IN" "$APK_OUT"
