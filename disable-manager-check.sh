@@ -1,0 +1,32 @@
+APK_IN="original.apk"
+APK_OUT="patched.apk"
+TARGET_CLASS="top/nkbe/npatch/LSPApplication"
+
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt install libsmali-java -y
+unzip -q "$APK_IN" "*.dex" -d tmp_dex
+
+FOUND_DEX=""
+for dex in tmp_dex/*.dex; do
+    if java -jar "$BAKSMALI_JAR" list classes "$dex" | grep -q "$TARGET_CLASS"; then
+        FOUND_DEX=$(basename "$dex")
+        echo "Class Found: $FOUND_DEX"
+        break
+    fi
+done
+if [ -z "$FOUND_DEX" ]; then
+    echo "Error dex not found!"
+    exit 1
+fi
+
+baksmali d "tmp_dex/$FOUND_DEX" -o tmp_smali
+SMALI_FILE="tmp_smali/$TARGET_CLASS.smali"
+sed -i '/if-nez v5, :cond_f/i \    const/4 v5, 0x1' "$SMALI_FILE"
+java -jar "$SMALI_JAR" a tmp_smali -o "tmp_dex/$FOUND_DEX"
+cp "$APK_IN" "$APK_OUT"
+cd tmp_dex
+zip -q -u "../$APK_OUT" "$FOUND_DEX"
+cd ..
+zip -q -d "$APK_OUT" "META-INF/*"
+rm -rf tmp_dex tmp_smali
