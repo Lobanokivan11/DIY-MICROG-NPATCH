@@ -27,6 +27,7 @@ cd ..
 rm -rf tmp_dex tmp_smali
 zipalign -f -v 4 "$APK_OUT" "aligned_patched.apk"
 apksigner sign --ks-key-alias lob --ks sign.keystore --ks-pass pass:369852 --key-pass pass:369852 --out "final_signed.apk" "aligned_patched.apk"
+rm "aligned_patched.apk"
 echo "============================================="
 echo "Success! Ready file: final_signed.apk"
 echo "============================================="
