@@ -45,6 +45,7 @@ sed -i 's/com\.google\.android\.play\.core\.integrityservice\.BIND_INTEGRITY_SER
 sed -i 's/com\.google\.android\.play\.core\.expressintegrityservice\.BIND_EXPRESS_INTEGRITY_SERVICE/top.nkbe.npatch.gms.play.core.expressintegrityservice.BIND_EXPRESS_INTEGRITY_SERVICE/g' ./vending-app/src/main/AndroidManifest.xml
 sed -i 's/com\.google\.android\.play\.core\.install\.BIND_UPDATE_SERVICE/top.nkbe.npatch.gms.play.core.install.BIND_UPDATE_SERVICE/g' ./vending-app/src/main/AndroidManifest.xml
 sed -i 's/com\.google\.android\.libraries\.identity\.googleid\.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL/top.nkbe.npatch.libraries.identity.googleid.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL/g' ./play-services-core/src/main/res/xml/credentials_provider_google_id.xml
+find . -name "AndroidManifest.xml" -exec sed -i 's/android:authorities="com\.google\.settings"/android:authorities="top.nkbe.npatch.gms.settings"/g' {} +
 cp -r ../profiles/*.xml play-services-core/src/main/res/xml
 export GRADLE_MICROG_VERSION_WITHOUT_GIT=0
 ./gradlew :play-services-core:assembleMapboxDefault
