@@ -4,12 +4,8 @@ git lfs install
 git submodule update --init --recursive
 git clone https://github.com/microg/GmsCore.git input
 cd input
-find . -name "AndroidManifest.xml" | xargs sed -i 's/com\.google\.android\.gms/top.nkbe.npatch.gms/g' || true
-find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/com\.google\.android\.gms/top.nkbe.npatch.gms/g' || true
-find . -name "*.java" -o -name "*.kt" -type f -print0 | xargs -0 perl -i -pe '
-    s/com\.google\.android\.gms/top.nkbe.npatch.gms/g 
-    unless /BuildConfig|(?:\b|\.)R(?:\b|\.|$)/
-' || true
+find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/applicationId "com\.google\.android\.gms"/applicationId "top.nkbe.npatch.gms"/g' || true
+find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/applicationId = "com\.google\.android\.gms"/applicationId = "top.nkbe.npatch.gms"/g' || true
 cp -r ../profiles/*.xml play-services-core/src/main/res/xml
 export GRADLE_MICROG_VERSION_WITHOUT_GIT=0
 ./gradlew :play-services-core:assembleMapboxDefault
