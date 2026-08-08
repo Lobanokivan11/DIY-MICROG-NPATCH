@@ -20,7 +20,7 @@
 
 4. you will see new_loader.bin file rename it to folder.bin and place to assets/folder.bin of NPatch Manager (apk) or cli (jar) allowing to replace
 
-5. rename Patched Manager to original.apk and run disable-manager-check.sh (needed for patched NPatch to work) you need to install Baksmali 3.0.8
+5. rename Patched Manager to original.apk and run disable-manager-check.sh (needed for patched NPatch to work)
 
 6. sign NPatch Manager (apk) or cli (jar) using apksigner or any sign tool you actually use
 
