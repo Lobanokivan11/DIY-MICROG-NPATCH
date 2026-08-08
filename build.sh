@@ -5,7 +5,7 @@ git submodule update --init --recursive
 git clone https://github.com/microg/GmsCore.git input
 cd input
 sed -i '/android.applicationVariants.all { variant ->/a \    variant.mergedFlavor.applicationId = "top.nkbe.npatch.gms"' play-services-core/build.gradle
-find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/"package_id", "com\.google\.android\.gms"/ "top.nkbe.npatch.gms"/g' || true
+find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/"package_id", "com\.google\.android\.gms"/"package_id", "top.nkbe.npatch.gms"/g' || true
 find . -name "build.gradle" -o -name "build.gradle.kts" | xargs sed -i 's/"package_id", "org\.microg\.gms"/"package_id", "top.nkbe.npatch.gms"/g' || true
 find . -name "AndroidManifest.xml" | xargs sed -i 's/com\.google\.android\.gms/top.nkbe.npatch.gms/g' || true
 find . -name "AndroidManifest.xml" | xargs sed -i 's/com\.google\.android\.googleapps/top.nkbe.npatch.googleapps/g' || true
