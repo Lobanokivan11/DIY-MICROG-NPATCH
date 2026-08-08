@@ -16,8 +16,8 @@ TARGET_CLASS_SMALI="L${TARGET_CLASS_PATH};"
 # Clear previous temporary directories and recreate the dex folder
 rm -rf tmp_dex tmp_smali
 mkdir -p tmp_dex
-wget -O baksmali.jar https://dl.google.com/android/maven2/com/android/tools/smali/smali-baksmali/3.0.8/smali-baksmali-3.0.8.jar
-wget -O smali.jar https://dl.google.com/android/maven2/com/android/tools/smali/smali/3.0.8/smali-3.0.8.jar
+wget -O baksmali.jar https://github.com/baksmali/smali/releases/download/3.0.8/baksmali-3.0.8-fat-release.jar
+wget -O smali.jar https://github.com/baksmali/smali/releases/download/3.0.8/smali-3.0.8-fat-release.jar
 # Extract all .dex files including those in subdirectories (e.g., assets/)
 unzip -q "$APK_IN" "*.dex" -d tmp_dex
 
