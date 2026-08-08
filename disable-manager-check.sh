@@ -5,7 +5,7 @@ unzip -q "$APK_IN" "*.dex" -d tmp_dex
 
 FOUND_DEX=""
 for dex in tmp_dex/*.dex; do
-    if java -jar "$BAKSMALI_JAR" list classes "$dex" | grep -q "$TARGET_CLASS"; then
+    if baksmali list classes "$dex" | grep -q "$TARGET_CLASS"; then
         FOUND_DEX=$(basename "$dex")
         echo "Class Found: $FOUND_DEX"
         break
