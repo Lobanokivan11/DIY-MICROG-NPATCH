@@ -1,0 +1,10 @@
+--- LSPApplication.smali.orig	2026-10-16 18:53:36.179666589 +0300
++++ LSPApplication.smali	2026-10-16 19:00:49.249270581 +0300
+@@ -855,6 +855,7 @@
+     const/4 v14, 0x3
+ 
+     .line 327
++    const/4 v5, 0x1
+     if-nez v5, :cond_15f
+ 
+     .line 328
