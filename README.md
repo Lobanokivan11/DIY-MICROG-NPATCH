@@ -2,7 +2,7 @@
 
 ## NOTE!!!
 
-NPatch Gmscore Can Be Used Not only on NPatch it also being supported by JingMatrix/LSPatch since [canary-490](https://github.com/JingMatrix/LSPatch/releases/tag/canary-490) version
+NPatch Gmscore Can Be Used Not only on NPatch it also being supported by [JingMatrix/LSPatch](https://github.com/JingMatrix/LSPatch) since [canary-490](https://github.com/JingMatrix/LSPatch/releases/tag/canary-490) version
 
 ## How to Install
 
