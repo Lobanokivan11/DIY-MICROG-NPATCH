@@ -1,0 +1,12 @@
+diff -Naur MicroGLogin-bak/app/src/main/kotlin/com/xaxaxax/microglogin/GmsRules.kt MicroGLogin/app/src/main/kotlin/com/xaxaxax/microglogin/GmsRules.kt
+--- MicroGLogin-bak/app/src/main/kotlin/com/xaxaxax/microglogin/GmsRules.kt	2026-10-29 14:58:44.424655714 +0300
++++ MicroGLogin/app/src/main/kotlin/com/xaxaxax/microglogin/GmsRules.kt	2026-10-29 15:02:50.047394264 +0300
+@@ -110,7 +110,7 @@
+             return if (vendor.isEmpty() || vendor == "com.google") null else vendor + VENDOR_NAMESPACE_SUFFIX
+         }
+ 
+-        const val MICROG_RE_PACKAGE = "app.revanced.android.gms"
++        const val MICROG_RE_PACKAGE = "top.nkbe.npatch.gms"
+         private const val GSF_PACKAGE = "com.google.android.gsf"
+         private const val VENDOR_NAMESPACE_SUFFIX = ".android.gms"
+         private val KEPT_AUTHORITIES = setOf("$GMS_PACKAGE.chimera", "$GMS_PACKAGE.fonts")
