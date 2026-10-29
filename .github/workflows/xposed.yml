@@ -1,4 +1,4 @@
-name: Build GmsCore
+name: Build XPOSED
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
   - cron: "0 * * * *"
 
 jobs:
-  start_building_gmscore:
+  start_building_xposed:
     runs-on: ubuntu-22.04
     permissions: write-all
     steps:
